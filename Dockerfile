@@ -39,7 +39,7 @@ RUN apt-get update \
     gnupg
 
 #ENV CHROME_BIN=/usr/bin/chromium-browser
-RUN apt update && apt-get -y install chromium chromium-driver
+RUN apt-get update && apt-get -y install chromium chromium-driver
 RUN apt-get -y install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb
 # prepare place for binaries symlinks
 RUN mkdir -p /home/jenkins/bin && \
@@ -56,8 +56,6 @@ COPY --from=fetcher --chown=jenkins:jenkins nvm $NVM_DIR
 COPY bin /usr/local/bin
 USER ${user}
 RUN nvm install node
-RUN node --version
-RUN npm --version
 RUN curl -fsSL https://get.pnpm.io/install.sh |ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
 ENV PNPM_HOME="/home/jenkins/.local/share/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
