@@ -7,9 +7,10 @@ RUN apt-get update && \
         --branch $NVM_VERSION \
         https://github.com/nvm-sh/nvm.git
 
-FROM jenkins/inbound-agent:alpine AS jnlp
+FROM jenkins/inbound-agent:alpine-jdk21 as jnlp
 
-FROM jenkins/agent:latest-jdk17
+#jdk21 from October'26
+FROM jenkins/agent:3391.va_37fa_a_305d6d-5-jdk21
 
 ARG version
 LABEL Description="This is a base image, which allows connecting Jenkins agents via JNLP protocols" Vendor="Jenkins project" Version="$version"
@@ -33,7 +34,6 @@ RUN apt-get update \
     rsync \
     openssh-client \
     ca-certificates-java \
-    openjdk-17-jdk \
     graphviz \
     ca-certificates \
     gnupg
