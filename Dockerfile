@@ -59,9 +59,9 @@ USER ${user}
 
 RUN nvm install node
 
-RUN curl -fsSL https://get.pnpm.io/install.sh |ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
+RUN curl -fsSL https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
 ENV PNPM_HOME="/home/jenkins/.local/share/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
+ENV PATH="$PNPM_HOME/bin:$PATH"
 RUN pnpm config set store-dir /home/jenkins/.local/share/pnpm/store
 
 # Cypress 13.6.3 because of bugs >13.6.3 https://github.com/cypress-io/cypress/issues/27501
